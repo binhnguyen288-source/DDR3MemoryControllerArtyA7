@@ -1,0 +1,10 @@
+0.7
+2020.2
+Oct 14 2022
+05:20:55
+C:/Users/nguye/ddr3_controller_artya7/ddr3_controller_artya7.sim/sim_1/behav/xsim/glbl.v,1665704903,verilog,,,,glbl,,uvm,,,,,,
+C:/Users/nguye/ddr3_controller_artya7/ddr3_controller_artya7.srcs/sim_1/imports/sim_1/imports/src_v/ddr3.v,1675207593,verilog,,,C:/Users/nguye/ddr3_controller_artya7/ddr3_controller_artya7.srcs/sim_1/imports/src_v/2048Mb_ddr3_parameters.vh,ddr3,,uvm,../../../../ddr3_controller_artya7.srcs/sim_1/imports/src_v,,,,,
+C:/Users/nguye/ddr3_controller_artya7/ddr3_controller_artya7.srcs/sim_1/imports/sim_1/new/testbench.v,1675806953,verilog,,,,testbench,,uvm,../../../../ddr3_controller_artya7.srcs/sim_1/imports/src_v,,,,,
+C:/Users/nguye/ddr3_controller_artya7/ddr3_controller_artya7.srcs/sim_1/imports/src_v/2048Mb_ddr3_parameters.vh,1675206430,verilog,,,,,,,,,,,,
+C:/Users/nguye/ddr3_controller_artya7/ddr3_controller_artya7.srcs/sources_1/new/ddr3_controller.sv,1675815111,systemVerilog,,C:/Users/nguye/ddr3_controller_artya7/ddr3_controller_artya7.srcs/sources_1/new/top.sv,,ddr3_controller,,uvm,../../../../ddr3_controller_artya7.srcs/sim_1/imports/src_v,,,,,
+C:/Users/nguye/ddr3_controller_artya7/ddr3_controller_artya7.srcs/sources_1/new/top.sv,1675817637,systemVerilog,,,,top,,uvm,../../../../ddr3_controller_artya7.srcs/sim_1/imports/src_v,,,,,

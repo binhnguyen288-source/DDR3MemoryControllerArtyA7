@@ -1,0 +1,16 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../ddr3_controller_artya7.srcs/sim_1/imports/src_v" \
+"../../../../ddr3_controller_artya7.srcs/sim_1/imports/sim_1/imports/src_v/ddr3.v" \
+
+sv xil_defaultlib  --include "../../../../ddr3_controller_artya7.srcs/sim_1/imports/src_v" \
+"../../../../ddr3_controller_artya7.srcs/sources_1/new/ddr3_controller.sv" \
+"../../../../ddr3_controller_artya7.srcs/sources_1/new/top.sv" \
+
+verilog xil_defaultlib  --include "../../../../ddr3_controller_artya7.srcs/sim_1/imports/src_v" \
+"../../../../ddr3_controller_artya7.srcs/sim_1/imports/sim_1/new/testbench.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
