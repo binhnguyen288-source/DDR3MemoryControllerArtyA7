@@ -80,7 +80,7 @@ module testbench();
         ,.led(led)
     );
     always @(posedge osc) begin
-        if (led != 4'hf) $fatal(1, "error detected");
+        if (led !== 4'hf) $fatal(1, "error detected");
     end
     
 endmodule

@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
-| Date         : Wed Feb  8 07:56:44 2023
+| Date         : Fri Feb 17 22:11:24 2023
 | Host         : DESKTOP-D6FVSP1 running 64-bit major release  (build 9200)
 | Command      : report_drc -file top_drc_opted.rpt -pb top_drc_opted.pb -rpx top_drc_opted.rpx
 | Design       : top
@@ -24,188 +24,93 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max violations: <unlimited>
-             Violations found: 33
-+-----------+----------+-----------------------------------------------------+------------+
-| Rule      | Severity | Description                                         | Violations |
-+-----------+----------+-----------------------------------------------------+------------+
-| CFGBVS-1  | Warning  | Missing CFGBVS and CONFIG_VOLTAGE Design Properties | 1          |
-| REQP-101  | Warning  | enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  | 16         |
-| REQP-1580 | Warning  | Phase alignment                                     | 16         |
-+-----------+----------+-----------------------------------------------------+------------+
+             Violations found: 16
++-----------+----------+-----------------+------------+
+| Rule      | Severity | Description     | Violations |
++-----------+----------+-----------------+------------+
+| REQP-1580 | Warning  | Phase alignment | 16         |
++-----------+----------+-----------------+------------+
 
 2. REPORT DETAILS
 -----------------
-CFGBVS-1#1 Warning
-Missing CFGBVS and CONFIG_VOLTAGE Design Properties  
-Neither the CFGBVS nor CONFIG_VOLTAGE voltage property is set in the current_design.  Configuration bank voltage select (CFGBVS) must be set to VCCO or GND, and CONFIG_VOLTAGE must be set to the correct configuration voltage, in order to determine the I/O voltage support for the pins in bank 0.  It is suggested to specify these either using the 'Edit Device Properties' function in the GUI or directly in the XDC file using the following syntax:
-
- set_property CFGBVS value1 [current_design]
- #where value1 is either VCCO or GND
-
- set_property CONFIG_VOLTAGE value2 [current_design]
- #where value2 is the voltage provided to configuration bank 0
-
-Refer to the device configuration user guide for more information.
-Related violations: <none>
-
-REQP-101#1 Warning
-enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
-controller/genblk2.genblk1[0].ISERDESE2_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
-Related violations: <none>
-
-REQP-101#2 Warning
-enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
-controller/genblk2.genblk1[10].ISERDESE2_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
-Related violations: <none>
-
-REQP-101#3 Warning
-enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
-controller/genblk2.genblk1[11].ISERDESE2_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
-Related violations: <none>
-
-REQP-101#4 Warning
-enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
-controller/genblk2.genblk1[12].ISERDESE2_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
-Related violations: <none>
-
-REQP-101#5 Warning
-enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
-controller/genblk2.genblk1[13].ISERDESE2_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
-Related violations: <none>
-
-REQP-101#6 Warning
-enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
-controller/genblk2.genblk1[14].ISERDESE2_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
-Related violations: <none>
-
-REQP-101#7 Warning
-enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
-controller/genblk2.genblk1[15].ISERDESE2_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
-Related violations: <none>
-
-REQP-101#8 Warning
-enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
-controller/genblk2.genblk1[1].ISERDESE2_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
-Related violations: <none>
-
-REQP-101#9 Warning
-enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
-controller/genblk2.genblk1[2].ISERDESE2_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
-Related violations: <none>
-
-REQP-101#10 Warning
-enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
-controller/genblk2.genblk1[3].ISERDESE2_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
-Related violations: <none>
-
-REQP-101#11 Warning
-enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
-controller/genblk2.genblk1[4].ISERDESE2_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
-Related violations: <none>
-
-REQP-101#12 Warning
-enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
-controller/genblk2.genblk1[5].ISERDESE2_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
-Related violations: <none>
-
-REQP-101#13 Warning
-enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
-controller/genblk2.genblk1[6].ISERDESE2_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
-Related violations: <none>
-
-REQP-101#14 Warning
-enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
-controller/genblk2.genblk1[7].ISERDESE2_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
-Related violations: <none>
-
-REQP-101#15 Warning
-enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
-controller/genblk2.genblk1[8].ISERDESE2_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
-Related violations: <none>
-
-REQP-101#16 Warning
-enum_NUM_CE_1_connects_CE2_ACTIVE_connects_CE2_GND  
-controller/genblk2.genblk1[9].ISERDESE2_inst: Useless CE2 input pin. With NUM_CE set 1, the CE2 input pin is being ignored.
-Related violations: <none>
-
 REQP-1580#1 Warning
 Phase alignment  
-Unsupported clocking topology used for ISERDESE2 controller/genblk2.genblk1[0].ISERDESE2_inst. This can result in corrupted data. The controller/genblk2.genblk1[0].ISERDESE2_inst/OCLK / controller/genblk2.genblk1[0].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk2.genblk1[0].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk2.genblk1[0].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Unsupported clocking topology used for ISERDESE2 controller/genblk3.genblk1[0].ISERDESE2_inst. This can result in corrupted data. The controller/genblk3.genblk1[0].ISERDESE2_inst/OCLK / controller/genblk3.genblk1[0].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk3.genblk1[0].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk3.genblk1[0].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
 Related violations: <none>
 
 REQP-1580#2 Warning
 Phase alignment  
-Unsupported clocking topology used for ISERDESE2 controller/genblk2.genblk1[10].ISERDESE2_inst. This can result in corrupted data. The controller/genblk2.genblk1[10].ISERDESE2_inst/OCLK / controller/genblk2.genblk1[10].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk2.genblk1[10].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk2.genblk1[10].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Unsupported clocking topology used for ISERDESE2 controller/genblk3.genblk1[10].ISERDESE2_inst. This can result in corrupted data. The controller/genblk3.genblk1[10].ISERDESE2_inst/OCLK / controller/genblk3.genblk1[10].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk3.genblk1[10].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk3.genblk1[10].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
 Related violations: <none>
 
 REQP-1580#3 Warning
 Phase alignment  
-Unsupported clocking topology used for ISERDESE2 controller/genblk2.genblk1[11].ISERDESE2_inst. This can result in corrupted data. The controller/genblk2.genblk1[11].ISERDESE2_inst/OCLK / controller/genblk2.genblk1[11].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk2.genblk1[11].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk2.genblk1[11].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Unsupported clocking topology used for ISERDESE2 controller/genblk3.genblk1[11].ISERDESE2_inst. This can result in corrupted data. The controller/genblk3.genblk1[11].ISERDESE2_inst/OCLK / controller/genblk3.genblk1[11].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk3.genblk1[11].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk3.genblk1[11].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
 Related violations: <none>
 
 REQP-1580#4 Warning
 Phase alignment  
-Unsupported clocking topology used for ISERDESE2 controller/genblk2.genblk1[12].ISERDESE2_inst. This can result in corrupted data. The controller/genblk2.genblk1[12].ISERDESE2_inst/OCLK / controller/genblk2.genblk1[12].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk2.genblk1[12].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk2.genblk1[12].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Unsupported clocking topology used for ISERDESE2 controller/genblk3.genblk1[12].ISERDESE2_inst. This can result in corrupted data. The controller/genblk3.genblk1[12].ISERDESE2_inst/OCLK / controller/genblk3.genblk1[12].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk3.genblk1[12].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk3.genblk1[12].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
 Related violations: <none>
 
 REQP-1580#5 Warning
 Phase alignment  
-Unsupported clocking topology used for ISERDESE2 controller/genblk2.genblk1[13].ISERDESE2_inst. This can result in corrupted data. The controller/genblk2.genblk1[13].ISERDESE2_inst/OCLK / controller/genblk2.genblk1[13].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk2.genblk1[13].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk2.genblk1[13].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Unsupported clocking topology used for ISERDESE2 controller/genblk3.genblk1[13].ISERDESE2_inst. This can result in corrupted data. The controller/genblk3.genblk1[13].ISERDESE2_inst/OCLK / controller/genblk3.genblk1[13].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk3.genblk1[13].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk3.genblk1[13].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
 Related violations: <none>
 
 REQP-1580#6 Warning
 Phase alignment  
-Unsupported clocking topology used for ISERDESE2 controller/genblk2.genblk1[14].ISERDESE2_inst. This can result in corrupted data. The controller/genblk2.genblk1[14].ISERDESE2_inst/OCLK / controller/genblk2.genblk1[14].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk2.genblk1[14].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk2.genblk1[14].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Unsupported clocking topology used for ISERDESE2 controller/genblk3.genblk1[14].ISERDESE2_inst. This can result in corrupted data. The controller/genblk3.genblk1[14].ISERDESE2_inst/OCLK / controller/genblk3.genblk1[14].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk3.genblk1[14].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk3.genblk1[14].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
 Related violations: <none>
 
 REQP-1580#7 Warning
 Phase alignment  
-Unsupported clocking topology used for ISERDESE2 controller/genblk2.genblk1[15].ISERDESE2_inst. This can result in corrupted data. The controller/genblk2.genblk1[15].ISERDESE2_inst/OCLK / controller/genblk2.genblk1[15].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk2.genblk1[15].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk2.genblk1[15].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Unsupported clocking topology used for ISERDESE2 controller/genblk3.genblk1[15].ISERDESE2_inst. This can result in corrupted data. The controller/genblk3.genblk1[15].ISERDESE2_inst/OCLK / controller/genblk3.genblk1[15].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk3.genblk1[15].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk3.genblk1[15].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
 Related violations: <none>
 
 REQP-1580#8 Warning
 Phase alignment  
-Unsupported clocking topology used for ISERDESE2 controller/genblk2.genblk1[1].ISERDESE2_inst. This can result in corrupted data. The controller/genblk2.genblk1[1].ISERDESE2_inst/OCLK / controller/genblk2.genblk1[1].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk2.genblk1[1].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk2.genblk1[1].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Unsupported clocking topology used for ISERDESE2 controller/genblk3.genblk1[1].ISERDESE2_inst. This can result in corrupted data. The controller/genblk3.genblk1[1].ISERDESE2_inst/OCLK / controller/genblk3.genblk1[1].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk3.genblk1[1].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk3.genblk1[1].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
 Related violations: <none>
 
 REQP-1580#9 Warning
 Phase alignment  
-Unsupported clocking topology used for ISERDESE2 controller/genblk2.genblk1[2].ISERDESE2_inst. This can result in corrupted data. The controller/genblk2.genblk1[2].ISERDESE2_inst/OCLK / controller/genblk2.genblk1[2].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk2.genblk1[2].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk2.genblk1[2].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Unsupported clocking topology used for ISERDESE2 controller/genblk3.genblk1[2].ISERDESE2_inst. This can result in corrupted data. The controller/genblk3.genblk1[2].ISERDESE2_inst/OCLK / controller/genblk3.genblk1[2].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk3.genblk1[2].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk3.genblk1[2].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
 Related violations: <none>
 
 REQP-1580#10 Warning
 Phase alignment  
-Unsupported clocking topology used for ISERDESE2 controller/genblk2.genblk1[3].ISERDESE2_inst. This can result in corrupted data. The controller/genblk2.genblk1[3].ISERDESE2_inst/OCLK / controller/genblk2.genblk1[3].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk2.genblk1[3].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk2.genblk1[3].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Unsupported clocking topology used for ISERDESE2 controller/genblk3.genblk1[3].ISERDESE2_inst. This can result in corrupted data. The controller/genblk3.genblk1[3].ISERDESE2_inst/OCLK / controller/genblk3.genblk1[3].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk3.genblk1[3].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk3.genblk1[3].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
 Related violations: <none>
 
 REQP-1580#11 Warning
 Phase alignment  
-Unsupported clocking topology used for ISERDESE2 controller/genblk2.genblk1[4].ISERDESE2_inst. This can result in corrupted data. The controller/genblk2.genblk1[4].ISERDESE2_inst/OCLK / controller/genblk2.genblk1[4].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk2.genblk1[4].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk2.genblk1[4].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Unsupported clocking topology used for ISERDESE2 controller/genblk3.genblk1[4].ISERDESE2_inst. This can result in corrupted data. The controller/genblk3.genblk1[4].ISERDESE2_inst/OCLK / controller/genblk3.genblk1[4].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk3.genblk1[4].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk3.genblk1[4].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
 Related violations: <none>
 
 REQP-1580#12 Warning
 Phase alignment  
-Unsupported clocking topology used for ISERDESE2 controller/genblk2.genblk1[5].ISERDESE2_inst. This can result in corrupted data. The controller/genblk2.genblk1[5].ISERDESE2_inst/OCLK / controller/genblk2.genblk1[5].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk2.genblk1[5].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk2.genblk1[5].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Unsupported clocking topology used for ISERDESE2 controller/genblk3.genblk1[5].ISERDESE2_inst. This can result in corrupted data. The controller/genblk3.genblk1[5].ISERDESE2_inst/OCLK / controller/genblk3.genblk1[5].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk3.genblk1[5].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk3.genblk1[5].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
 Related violations: <none>
 
 REQP-1580#13 Warning
 Phase alignment  
-Unsupported clocking topology used for ISERDESE2 controller/genblk2.genblk1[6].ISERDESE2_inst. This can result in corrupted data. The controller/genblk2.genblk1[6].ISERDESE2_inst/OCLK / controller/genblk2.genblk1[6].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk2.genblk1[6].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk2.genblk1[6].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Unsupported clocking topology used for ISERDESE2 controller/genblk3.genblk1[6].ISERDESE2_inst. This can result in corrupted data. The controller/genblk3.genblk1[6].ISERDESE2_inst/OCLK / controller/genblk3.genblk1[6].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk3.genblk1[6].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk3.genblk1[6].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
 Related violations: <none>
 
 REQP-1580#14 Warning
 Phase alignment  
-Unsupported clocking topology used for ISERDESE2 controller/genblk2.genblk1[7].ISERDESE2_inst. This can result in corrupted data. The controller/genblk2.genblk1[7].ISERDESE2_inst/OCLK / controller/genblk2.genblk1[7].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk2.genblk1[7].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk2.genblk1[7].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Unsupported clocking topology used for ISERDESE2 controller/genblk3.genblk1[7].ISERDESE2_inst. This can result in corrupted data. The controller/genblk3.genblk1[7].ISERDESE2_inst/OCLK / controller/genblk3.genblk1[7].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk3.genblk1[7].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk3.genblk1[7].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
 Related violations: <none>
 
 REQP-1580#15 Warning
 Phase alignment  
-Unsupported clocking topology used for ISERDESE2 controller/genblk2.genblk1[8].ISERDESE2_inst. This can result in corrupted data. The controller/genblk2.genblk1[8].ISERDESE2_inst/OCLK / controller/genblk2.genblk1[8].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk2.genblk1[8].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk2.genblk1[8].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Unsupported clocking topology used for ISERDESE2 controller/genblk3.genblk1[8].ISERDESE2_inst. This can result in corrupted data. The controller/genblk3.genblk1[8].ISERDESE2_inst/OCLK / controller/genblk3.genblk1[8].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk3.genblk1[8].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk3.genblk1[8].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
 Related violations: <none>
 
 REQP-1580#16 Warning
 Phase alignment  
-Unsupported clocking topology used for ISERDESE2 controller/genblk2.genblk1[9].ISERDESE2_inst. This can result in corrupted data. The controller/genblk2.genblk1[9].ISERDESE2_inst/OCLK / controller/genblk2.genblk1[9].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk2.genblk1[9].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk2.genblk1[9].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
+Unsupported clocking topology used for ISERDESE2 controller/genblk3.genblk1[9].ISERDESE2_inst. This can result in corrupted data. The controller/genblk3.genblk1[9].ISERDESE2_inst/OCLK / controller/genblk3.genblk1[9].ISERDESE2_inst/CLKDIV pins should be driven by the same source through the same buffer type or by a BUFIO / BUFR combination in order to have a proper phase relationship and the controller/genblk3.genblk1[9].ISERDESE2_inst/CLK pin should be driven similarly to the controller/genblk3.genblk1[9].ISERDESE2_inst/OCLK pin. Please refer to the Select I/O User Guide for supported clocking topologies of the chosen INTERFACE_TYPE mode.
 Related violations: <none>
 
 

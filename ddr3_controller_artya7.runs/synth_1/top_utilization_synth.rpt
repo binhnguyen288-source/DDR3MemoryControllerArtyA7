@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
-| Date         : Wed Feb  8 07:56:18 2023
+| Date         : Fri Feb 17 22:10:59 2023
 | Host         : DESKTOP-D6FVSP1 running 64-bit major release  (build 9200)
 | Command      : report_utilization -file top_utilization_synth.rpt -pb top_utilization_synth.pb
 | Design       : top
@@ -31,13 +31,13 @@ Table of Contents
 +----------------------------+------+-------+------------+-----------+-------+
 |          Site Type         | Used | Fixed | Prohibited | Available | Util% |
 +----------------------------+------+-------+------------+-----------+-------+
-| Slice LUTs*                |  482 |     0 |          0 |     20800 |  2.32 |
-|   LUT as Logic             |  355 |     0 |          0 |     20800 |  1.71 |
-|   LUT as Memory            |  127 |     0 |          0 |      9600 |  1.32 |
-|     LUT as Distributed RAM |  125 |     0 |            |           |       |
+| Slice LUTs*                |  505 |     0 |          0 |     20800 |  2.43 |
+|   LUT as Logic             |  375 |     0 |          0 |     20800 |  1.80 |
+|   LUT as Memory            |  130 |     0 |          0 |      9600 |  1.35 |
+|     LUT as Distributed RAM |  128 |     0 |            |           |       |
 |     LUT as Shift Register  |    2 |     0 |            |           |       |
-| Slice Registers            |  763 |     0 |          0 |     41600 |  1.83 |
-|   Register as Flip Flop    |  763 |     0 |          0 |     41600 |  1.83 |
+| Slice Registers            |  764 |     0 |          0 |     41600 |  1.84 |
+|   Register as Flip Flop    |  764 |     0 |          0 |     41600 |  1.84 |
 |   Register as Latch        |    0 |     0 |          0 |     41600 |  0.00 |
 | F7 Muxes                   |    4 |     0 |          0 |     16300 |  0.02 |
 | F8 Muxes                   |    2 |     0 |          0 |      8150 |  0.02 |
@@ -60,8 +60,8 @@ Warning! LUT value is adjusted to account for LUT combining.
 | 0     |          Yes |           - |            - |
 | 0     |          Yes |           - |          Set |
 | 0     |          Yes |           - |        Reset |
-| 11    |          Yes |         Set |            - |
-| 752   |          Yes |       Reset |            - |
+| 13    |          Yes |         Set |            - |
+| 751   |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -153,22 +153,22 @@ Warning! LUT value is adjusted to account for LUT combining.
 +------------+------+---------------------+
 |  Ref Name  | Used | Functional Category |
 +------------+------+---------------------+
-| FDRE       |  752 |        Flop & Latch |
-| LUT2       |  157 |                 LUT |
-| RAMS32     |  125 |  Distributed Memory |
-| LUT5       |  119 |                 LUT |
-| LUT6       |  109 |                 LUT |
+| FDRE       |  751 |        Flop & Latch |
+| LUT2       |  154 |                 LUT |
+| RAMS32     |  128 |  Distributed Memory |
+| LUT5       |  118 |                 LUT |
+| LUT6       |  112 |                 LUT |
 | OBUF       |   30 |                  IO |
-| LUT1       |   26 |                 LUT |
-| LUT4       |   23 |                 LUT |
-| CARRY4     |   22 |          CarryLogic |
+| LUT4       |   30 |                 LUT |
+| LUT1       |   29 |                 LUT |
 | OSERDESE2  |   18 |                  IO |
 | IDELAYE2   |   18 |                  IO |
+| CARRY4     |   18 |          CarryLogic |
 | IBUF       |   17 |                  IO |
 | OBUFT      |   16 |                  IO |
 | ISERDESE2  |   16 |                  IO |
-| FDSE       |   11 |        Flop & Latch |
-| LUT3       |    6 |                 LUT |
+| FDSE       |   13 |        Flop & Latch |
+| LUT3       |   12 |                 LUT |
 | OBUFTDS    |    4 |                  IO |
 | MUXF7      |    4 |               MuxFx |
 | INV        |    3 |                 LUT |

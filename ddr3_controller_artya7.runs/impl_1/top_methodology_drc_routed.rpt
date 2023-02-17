@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
-| Date         : Wed Feb  8 07:57:06 2023
+| Date         : Fri Feb 17 22:11:46 2023
 | Host         : DESKTOP-D6FVSP1 running 64-bit major release  (build 9200)
 | Command      : report_methodology -file top_methodology_drc_routed.rpt -pb top_methodology_drc_routed.pb -rpx top_methodology_drc_routed.rpx
 | Design       : top
@@ -35,162 +35,162 @@ Table of Contents
 -----------------
 TIMING-17#1 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[0].ISERDESE2_inst/CLK is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[0].ISERDESE2_inst/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#2 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[0].ISERDESE2_inst/CLKB is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[0].ISERDESE2_inst/CLKB is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#3 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[10].ISERDESE2_inst/CLK is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[10].ISERDESE2_inst/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#4 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[10].ISERDESE2_inst/CLKB is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[10].ISERDESE2_inst/CLKB is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#5 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[11].ISERDESE2_inst/CLK is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[11].ISERDESE2_inst/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#6 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[11].ISERDESE2_inst/CLKB is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[11].ISERDESE2_inst/CLKB is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#7 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[12].ISERDESE2_inst/CLK is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[12].ISERDESE2_inst/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#8 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[12].ISERDESE2_inst/CLKB is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[12].ISERDESE2_inst/CLKB is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#9 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[13].ISERDESE2_inst/CLK is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[13].ISERDESE2_inst/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#10 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[13].ISERDESE2_inst/CLKB is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[13].ISERDESE2_inst/CLKB is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#11 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[14].ISERDESE2_inst/CLK is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[14].ISERDESE2_inst/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#12 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[14].ISERDESE2_inst/CLKB is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[14].ISERDESE2_inst/CLKB is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#13 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[15].ISERDESE2_inst/CLK is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[15].ISERDESE2_inst/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#14 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[15].ISERDESE2_inst/CLKB is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[15].ISERDESE2_inst/CLKB is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#15 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[1].ISERDESE2_inst/CLK is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[1].ISERDESE2_inst/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#16 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[1].ISERDESE2_inst/CLKB is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[1].ISERDESE2_inst/CLKB is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#17 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[2].ISERDESE2_inst/CLK is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[2].ISERDESE2_inst/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#18 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[2].ISERDESE2_inst/CLKB is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[2].ISERDESE2_inst/CLKB is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#19 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[3].ISERDESE2_inst/CLK is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[3].ISERDESE2_inst/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#20 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[3].ISERDESE2_inst/CLKB is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[3].ISERDESE2_inst/CLKB is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#21 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[4].ISERDESE2_inst/CLK is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[4].ISERDESE2_inst/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#22 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[4].ISERDESE2_inst/CLKB is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[4].ISERDESE2_inst/CLKB is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#23 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[5].ISERDESE2_inst/CLK is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[5].ISERDESE2_inst/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#24 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[5].ISERDESE2_inst/CLKB is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[5].ISERDESE2_inst/CLKB is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#25 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[6].ISERDESE2_inst/CLK is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[6].ISERDESE2_inst/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#26 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[6].ISERDESE2_inst/CLKB is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[6].ISERDESE2_inst/CLKB is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#27 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[7].ISERDESE2_inst/CLK is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[7].ISERDESE2_inst/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#28 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[7].ISERDESE2_inst/CLKB is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[7].ISERDESE2_inst/CLKB is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#29 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[8].ISERDESE2_inst/CLK is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[8].ISERDESE2_inst/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#30 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[8].ISERDESE2_inst/CLKB is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[8].ISERDESE2_inst/CLKB is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#31 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[9].ISERDESE2_inst/CLK is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[9].ISERDESE2_inst/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#32 Critical Warning
 Non-clocked sequential cell  
-The clock pin controller/genblk2.genblk1[9].ISERDESE2_inst/CLKB is not reached by a timing clock
+The clock pin controller/genblk3.genblk1[9].ISERDESE2_inst/CLKB is not reached by a timing clock
 Related violations: <none>
 
 TIMING-18#1 Warning

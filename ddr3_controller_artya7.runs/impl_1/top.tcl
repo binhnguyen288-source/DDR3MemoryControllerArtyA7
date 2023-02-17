@@ -17,7 +17,7 @@ proc create_report { reportName command } {
   }
 }
 namespace eval ::optrace {
-  variable script "C:/Users/nguye/ddr3_controller_artya7/ddr3_controller_artya7.runs/impl_1/top.tcl"
+  variable script "C:/Users/nguye/Documents/GitHub/DDR3MemoryControllerArtyA7/ddr3_controller_artya7.runs/impl_1/top.tcl"
   variable category "vivado_impl"
 }
 
@@ -132,15 +132,15 @@ OPTRACE "create in-memory project" START { }
   set_param project.singleFileAddWarning.threshold 0
 OPTRACE "create in-memory project" END { }
 OPTRACE "set parameters" START { }
-  set_property webtalk.parent_dir C:/Users/nguye/ddr3_controller_artya7/ddr3_controller_artya7.cache/wt [current_project]
-  set_property parent.project_path C:/Users/nguye/ddr3_controller_artya7/ddr3_controller_artya7.xpr [current_project]
-  set_property ip_output_repo C:/Users/nguye/ddr3_controller_artya7/ddr3_controller_artya7.cache/ip [current_project]
+  set_property webtalk.parent_dir C:/Users/nguye/Documents/GitHub/DDR3MemoryControllerArtyA7/ddr3_controller_artya7.cache/wt [current_project]
+  set_property parent.project_path C:/Users/nguye/Documents/GitHub/DDR3MemoryControllerArtyA7/ddr3_controller_artya7.xpr [current_project]
+  set_property ip_output_repo C:/Users/nguye/Documents/GitHub/DDR3MemoryControllerArtyA7/ddr3_controller_artya7.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
-  add_files -quiet C:/Users/nguye/ddr3_controller_artya7/ddr3_controller_artya7.runs/synth_1/top.dcp
+  add_files -quiet C:/Users/nguye/Documents/GitHub/DDR3MemoryControllerArtyA7/ddr3_controller_artya7.runs/synth_1/top.dcp
 OPTRACE "read constraints: implementation" START { }
-  read_xdc C:/Users/nguye/ddr3_controller_artya7/ddr3_controller_artya7.srcs/constrs_1/new/constraint.xdc
+  read_xdc C:/Users/nguye/Documents/GitHub/DDR3MemoryControllerArtyA7/ddr3_controller_artya7.srcs/constrs_1/new/constraint.xdc
 OPTRACE "read constraints: implementation" END { }
 OPTRACE "add files" END { }
 OPTRACE "link_design" START { }

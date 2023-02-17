@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
-| Date             : Wed Feb  8 07:57:06 2023
+| Date             : Fri Feb 17 22:11:46 2023
 | Host             : DESKTOP-D6FVSP1 running 64-bit major release  (build 9200)
 | Command          : report_power -file top_power_routed.rpt -pb top_power_summary_routed.pb -rpx top_power_routed.rpx
 | Design           : top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.408        |
+| Total On-Chip Power (W)  | 0.413        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.345        |
+| Dynamic (W)              | 0.349        |
 | Device Static (W)        | 0.064        |
 | Effective TJA (C/W)      | 4.8          |
 | Max Ambient (C)          | 98.0         |
@@ -53,19 +53,19 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.007 |        7 |       --- |             --- |
-| Slice Logic              |     0.001 |     1364 |       --- |             --- |
-|   LUT as Logic           |     0.001 |      346 |     20800 |            1.66 |
-|   Register               |    <0.001 |      763 |     41600 |            1.83 |
-|   CARRY4                 |    <0.001 |       22 |      8150 |            0.27 |
-|   LUT as Distributed RAM |    <0.001 |      125 |      9600 |            1.30 |
+| Slice Logic              |    <0.001 |     1410 |       --- |             --- |
+|   LUT as Logic           |    <0.001 |      360 |     20800 |            1.73 |
+|   Register               |    <0.001 |      765 |     41600 |            1.84 |
+|   CARRY4                 |    <0.001 |       18 |      8150 |            0.22 |
+|   LUT as Distributed RAM |    <0.001 |      128 |      9600 |            1.33 |
 |   F7/F8 Muxes            |    <0.001 |        6 |     32600 |            0.02 |
 |   LUT as Shift Register  |    <0.001 |        2 |      9600 |            0.02 |
-|   Others                 |     0.000 |        6 |       --- |             --- |
-| Signals                  |     0.002 |     1095 |       --- |             --- |
+|   Others                 |     0.000 |       39 |       --- |             --- |
+| Signals                  |    <0.001 |     1096 |       --- |             --- |
 | PLL                      |     0.093 |        1 |         5 |           20.00 |
-| I/O                      |     0.242 |       53 |       210 |           25.24 |
+| I/O                      |     0.248 |       53 |       210 |           25.24 |
 | Static Power             |     0.064 |          |           |                 |
-| Total                    |     0.408 |          |           |                 |
+| Total                    |     0.413 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -75,13 +75,13 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       0.950 |     0.037 |       0.030 |      0.006 |       NA    | Unspecified | NA         |
-| Vccaux    |       1.800 |     0.134 |       0.123 |      0.011 |       NA    | Unspecified | NA         |
+| Vccint    |       0.950 |     0.036 |       0.030 |      0.006 |       NA    | Unspecified | NA         |
+| Vccaux    |       1.800 |     0.136 |       0.125 |      0.011 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vcco135   |       1.350 |     0.071 |       0.070 |      0.001 |       NA    | Unspecified | NA         |
+| Vcco135   |       1.350 |     0.072 |       0.071 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccbram   |       0.950 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -128,15 +128,15 @@ Table of Contents
 2.2 Clock Constraints
 ---------------------
 
-+---------+---------+-----------------+
-| Clock   | Domain  | Constraint (ns) |
-+---------+---------+-----------------+
-| clk     | clk     |            10.0 |
-| clk_ddr | clk_ddr |             2.5 |
-| clk_fb  | clk_fb  |            10.0 |
-| clk_ref | clk_ref |             5.0 |
-| osc     | osc     |            10.0 |
-+---------+---------+-----------------+
++---------+--------------------+-----------------+
+| Clock   | Domain             | Constraint (ns) |
++---------+--------------------+-----------------+
+| OCLKB0  | clkgeninst/clk_ddr |             2.5 |
+| clk     | clkgeninst/clk     |            10.0 |
+| clk_fb  | clkgeninst/clk_fb  |            10.0 |
+| clk_ref | clkgeninst/clk_ref |             5.0 |
+| osc     | osc                |            10.0 |
++---------+--------------------+-----------------+
 
 
 3. Detailed Reports
@@ -148,29 +148,53 @@ Table of Contents
 +-------------------------------------+-----------+
 | Name                                | Power (W) |
 +-------------------------------------+-----------+
-| top                                 |     0.345 |
-|   controller                        |     0.203 |
+| top                                 |     0.349 |
+|   clkgeninst                        |     0.094 |
+|   controller                        |     0.248 |
 |     OBUFDS_inst                     |     0.006 |
-|     genblk1.genblk1[0].IOBUFDS_inst |     0.002 |
+|     genblk1[0].oddr_addr            |     0.002 |
+|     genblk1[10].oddr_addr           |     0.002 |
+|     genblk1[11].oddr_addr           |     0.002 |
+|     genblk1[12].oddr_addr           |     0.002 |
+|     genblk1[13].oddr_addr           |     0.002 |
+|     genblk1[1].oddr_addr            |     0.002 |
+|     genblk1[2].oddr_addr            |     0.002 |
+|     genblk1[3].oddr_addr            |     0.002 |
+|     genblk1[4].oddr_addr            |     0.002 |
+|     genblk1[5].oddr_addr            |     0.002 |
+|     genblk1[6].oddr_addr            |     0.002 |
+|     genblk1[7].oddr_addr            |     0.002 |
+|     genblk1[8].oddr_addr            |     0.002 |
+|     genblk1[9].oddr_addr            |     0.002 |
+|     genblk2.genblk1[0].IOBUFDS_inst |     0.002 |
 |       OBUFTDS                       |     0.002 |
-|     genblk1.genblk1[1].IOBUFDS_inst |     0.002 |
+|     genblk2.genblk1[1].IOBUFDS_inst |     0.002 |
 |       OBUFTDS                       |     0.002 |
-|     genblk1.genblk2[0].IOBUF_inst   |     0.007 |
-|     genblk1.genblk2[10].IOBUF_inst  |     0.007 |
-|     genblk1.genblk2[11].IOBUF_inst  |     0.003 |
-|     genblk1.genblk2[12].IOBUF_inst  |     0.006 |
-|     genblk1.genblk2[13].IOBUF_inst  |     0.007 |
-|     genblk1.genblk2[14].IOBUF_inst  |     0.007 |
-|     genblk1.genblk2[15].IOBUF_inst  |     0.007 |
-|     genblk1.genblk2[1].IOBUF_inst   |     0.007 |
-|     genblk1.genblk2[2].IOBUF_inst   |     0.007 |
-|     genblk1.genblk2[3].IOBUF_inst   |     0.007 |
-|     genblk1.genblk2[4].IOBUF_inst   |     0.007 |
-|     genblk1.genblk2[5].IOBUF_inst   |     0.007 |
-|     genblk1.genblk2[6].IOBUF_inst   |     0.007 |
-|     genblk1.genblk2[7].IOBUF_inst   |     0.007 |
-|     genblk1.genblk2[8].IOBUF_inst   |     0.007 |
-|     genblk1.genblk2[9].IOBUF_inst   |     0.007 |
+|     genblk2.genblk2[0].IOBUF_inst   |     0.007 |
+|     genblk2.genblk2[10].IOBUF_inst  |     0.007 |
+|     genblk2.genblk2[11].IOBUF_inst  |     0.007 |
+|     genblk2.genblk2[12].IOBUF_inst  |     0.007 |
+|     genblk2.genblk2[13].IOBUF_inst  |     0.007 |
+|     genblk2.genblk2[14].IOBUF_inst  |     0.007 |
+|     genblk2.genblk2[15].IOBUF_inst  |     0.007 |
+|     genblk2.genblk2[1].IOBUF_inst   |     0.007 |
+|     genblk2.genblk2[2].IOBUF_inst   |     0.007 |
+|     genblk2.genblk2[3].IOBUF_inst   |     0.007 |
+|     genblk2.genblk2[4].IOBUF_inst   |     0.007 |
+|     genblk2.genblk2[5].IOBUF_inst   |     0.007 |
+|     genblk2.genblk2[6].IOBUF_inst   |     0.007 |
+|     genblk2.genblk2[7].IOBUF_inst   |     0.007 |
+|     genblk2.genblk2[8].IOBUF_inst   |     0.007 |
+|     genblk2.genblk2[9].IOBUF_inst   |     0.007 |
+|     oddr_ba0_n                      |     0.002 |
+|     oddr_ba1_n                      |     0.002 |
+|     oddr_ba2_n                      |     0.002 |
+|     oddr_cas_n                      |     0.002 |
+|     oddr_cke                        |     0.002 |
+|     oddr_cs_n                       |     0.002 |
+|     oddr_ras_n                      |     0.002 |
+|     oddr_reset_n                    |     0.002 |
+|     oddr_we_n                       |     0.002 |
 +-------------------------------------+-----------+
 
 

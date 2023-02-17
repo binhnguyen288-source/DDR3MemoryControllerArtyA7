@@ -19,6 +19,28 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
+module oddr_pinout(
+    input clk,
+    input data,
+    output pin_out,
+    input rst
+);
+    
+    parameter rst_value = 1'b0;
+    
+    reg out_q;
+    always @(posedge clk)
+        out_q <= rst ? rst_value : data;
+        
+    OBUF #(
+      .IOSTANDARD("SSTL135"), // Specify the output I/O standard
+      .SLEW("SLOW") // Specify the output slew rate
+   ) OBUF_inst (
+      .O(pin_out),     // Buffer output (connect directly to top-level port)
+      .I(out_q)      // Buffer input
+   );
+
+endmodule
 
 module ddr3_controller(
     // user ports
@@ -52,9 +74,10 @@ module ddr3_controller(
 );
     
     
-    assign ddr3_reset_n = ~rst_i;
     assign ddr3_odt = 1'b0;
     assign ddr3_dm = 2'b00;
+    
+    
     OBUFDS #(
       .IOSTANDARD("DIFF_SSTL135"), // Specify the output I/O standard
       .SLEW("SLOW")           // Specify the output slew rate
@@ -64,32 +87,16 @@ module ddr3_controller(
       .I(~clk)      // Buffer input
    );
 
-    localparam CMD_NOP           = 4'b0111;
-    localparam CMD_ACTIVE        = 4'b0011;
-    localparam CMD_READ          = 4'b0101;
-    localparam CMD_WRITE         = 4'b0100;
-    localparam CMD_PRECHARGE     = 4'b0010;
-    localparam CMD_REFRESH       = 4'b0001;
-    localparam CMD_LOAD_MODE     = 4'b0000;
-    localparam CMD_ZQCL          = 4'b0110;
-    `ifdef XILINX_SIMULATOR
-        localparam REFRESH_CTR_Q_INIT   = 5000;
-    `else
-        localparam REFRESH_CTR_Q_INIT   = 50000;
-    `endif
-    localparam REFRESH_PERIOD_CK = 781;
+    localparam CMD_NOP            = 4'b0111;
+    localparam CMD_ACTIVE         = 4'b0011;
+    localparam CMD_READ           = 4'b0101;
+    localparam CMD_WRITE          = 4'b0100;
+    localparam CMD_PRECHARGE      = 4'b0010;
+    localparam CMD_REFRESH        = 4'b0001;
+    localparam CMD_LOAD_MODE      = 4'b0000;
+    localparam CMD_ZQCL           = 4'b0110;
     
-    reg[15:0] refresh_ctr_q;
-    
-    always_ff @(posedge clk) begin
-        if (rst_i)
-            refresh_ctr_q <= REFRESH_CTR_Q_INIT;
-        else if (|refresh_ctr_q)
-            refresh_ctr_q <= refresh_ctr_q - 1;
-        else
-            refresh_ctr_q <= REFRESH_PERIOD_CK;
-    end
-    
+   
     
     typedef enum {
         STATE_INIT,
@@ -106,6 +113,52 @@ module ddr3_controller(
     STATE state_r;
     STATE target_r;
     
+    
+   
+    
+    
+    
+    reg[3:0] command_r;
+    reg[13:0] addr_r;
+    reg[2:0] bank_r;
+    reg cke_r;
+    reg reset_n_r;
+    
+    function int max(input int a, input int b);
+        return a > b ? a : b;
+    endfunction
+    
+    localparam clk_period_ns = 10;
+    function int ns_to_clk(input int ns);
+        return (ns + clk_period_ns - 1) / clk_period_ns;
+    endfunction
+    
+    localparam tRFC = 160;
+    localparam cRFC = ns_to_clk(160);
+    localparam cMRD = 4;
+    localparam cMOD = ns_to_clk(max(12 * clk_period_ns, 15));
+    localparam cXPR = ns_to_clk(max(5 * clk_period_ns, tRFC + 10));
+    localparam cDLLK = 512;
+    localparam cZQInit = 512;
+    localparam cRCD = ns_to_clk(14); // active to read/write
+    localparam cRP = ns_to_clk(14);  // precharge period
+    localparam cRESET  = ns_to_clk(200_000) + 1;
+    localparam cRSTCKE = ns_to_clk(500_000) + 1;
+    
+    localparam REFRESH_CTR_Q_INIT = cZQInit + cMOD + 3 * cMRD + cXPR + cRSTCKE + cRESET;
+    localparam REFRESH_PERIOD_CK  = 781;
+    
+    reg[16:0] refresh_ctr_q;
+    
+    always_ff @(posedge clk) begin
+        if (rst_i)
+            refresh_ctr_q <= REFRESH_CTR_Q_INIT;
+        else if (|refresh_ctr_q)
+            refresh_ctr_q <= refresh_ctr_q - 1;
+        else
+            refresh_ctr_q <= REFRESH_PERIOD_CK;
+    end
+    
     reg need_refresh_q = 1'b0;
     always_ff @(posedge clk) begin
         if (rst_i)
@@ -115,45 +168,42 @@ module ddr3_controller(
         else if (state_q == STATE_REFRESH)
             need_refresh_q <= 1'b0;
     end
-   
     
     
-    
-    reg[3:0] command_r;
-    reg[13:0] addr_r;
-    reg[2:0] bank_r;
-    reg cke_r;
     
     always_comb begin
         command_r = CMD_NOP;
-        cke_r = 1'b1;
-        addr_r = 0;
-        bank_r = 0;
+        cke_r     = 1'b1;
+        reset_n_r = 1'b1;
+        addr_r    = 14'd0;
+        bank_r    = 3'd0;
         case (state_q)
             STATE_INIT: begin
-                if (refresh_ctr_q > 1000)
+                if (refresh_ctr_q > cZQInit + cMOD + 3 * cMRD + cXPR + cRSTCKE)
+                    reset_n_r = 1'b0;
+                if (refresh_ctr_q > cZQInit + cMOD + 3 * cMRD + cXPR)
                     cke_r = 1'b0;
-                if (refresh_ctr_q == 900) begin
+                if (refresh_ctr_q == cZQInit + cMOD + 3 * cMRD) begin
                     command_r = CMD_LOAD_MODE;
                     bank_r    = 3'b010;
                     addr_r    = 14'h0008;
                 end
-                if (refresh_ctr_q == 800) begin
+                if (refresh_ctr_q == cZQInit + cMOD + 2 * cMRD) begin
                     command_r = CMD_LOAD_MODE;
                     bank_r    = 3'b011;
                     addr_r    = 14'h0000;
                 end
-                if (refresh_ctr_q == 700) begin
+                if (refresh_ctr_q == cZQInit + cMOD + cMRD) begin
                     command_r = CMD_LOAD_MODE;
                     bank_r    = 3'b001;
                     addr_r    = 14'h0001;
                 end
-                if (refresh_ctr_q == 600) begin
+                if (refresh_ctr_q == cZQInit + cMOD) begin
                     command_r = CMD_LOAD_MODE;
                     bank_r    = 3'b000;
-                    addr_r    = 14'h0120;
+                    addr_r    = 14'h0320;
                 end
-                if (refresh_ctr_q == 512) begin
+                if (refresh_ctr_q == cZQInit) begin
                     command_r = CMD_ZQCL;
                     addr_r[10] = 1'b1;
                 end
@@ -165,50 +215,44 @@ module ddr3_controller(
             STATE_ACTIVE: begin
                 command_r = CMD_ACTIVE;
                 bank_r = ram_addr[13:11];
-                addr_r = 14'h0000;
+                addr_r = ram_addr[27:14];
             end
             STATE_WRITE: begin
                 command_r = CMD_WRITE;
                 bank_r = ram_addr[13:11];
                 addr_r[9:0] = ram_addr[10:1];
-                addr_r[10] = 1'b1;
+                addr_r[10] = 1'b1; // auto precharge
             end
             STATE_READ: begin
                 command_r = CMD_READ;
                 bank_r = ram_addr[13:11];
-                addr_r = ram_addr[10:1];
-                addr_r[10] = 1'b1;
+                addr_r[9:0] = ram_addr[10:1];
+                addr_r[10] = 1'b1; // auto precharge
             end
             STATE_REFRESH: begin
                 command_r = CMD_REFRESH;
             end
+            default:;
         endcase
     end
     
     wire delaying;
-    reg cke_q = 1'b0;
-    reg[13:0] addr_q;
-    reg[2:0] bank_q;
-    reg[3:0] command_q = 4'h0;
-    always_ff @(posedge clk)
-        cke_q <= rst_i ? 1'b0 : cke_r;
-    always_ff @(posedge clk)
-        if (rst_i || delaying) begin
-            command_q <= CMD_NOP;
+    oddr_pinout #(.rst_value(1'b0)) oddr_reset_n(.clk(clk), .data(reset_n_r), .pin_out(ddr3_reset_n), .rst(rst_i));
+    oddr_pinout #(.rst_value(1'b0)) oddr_cke(.clk(clk), .data(cke_r), .pin_out(ddr3_cke), .rst(rst_i));
+    oddr_pinout #(.rst_value(1'b0)) oddr_cs_n(.clk(clk), .data(command_r[3]), .pin_out(ddr3_cs_n), .rst(rst_i || delaying));
+    oddr_pinout #(.rst_value(1'b1)) oddr_ras_n(.clk(clk), .data(command_r[2]), .pin_out(ddr3_ras_n), .rst(rst_i || delaying));
+    oddr_pinout #(.rst_value(1'b1)) oddr_cas_n(.clk(clk), .data(command_r[1]), .pin_out(ddr3_cas_n), .rst(rst_i || delaying));
+    oddr_pinout #(.rst_value(1'b1)) oddr_we_n(.clk(clk), .data(command_r[0]), .pin_out(ddr3_we_n), .rst(rst_i || delaying));
+    
+    oddr_pinout oddr_ba0_n(.clk(clk), .data(bank_r[0]), .pin_out(ddr3_ba[0]), .rst(1'b0));
+    oddr_pinout oddr_ba1_n(.clk(clk), .data(bank_r[1]), .pin_out(ddr3_ba[1]), .rst(1'b0));
+    oddr_pinout oddr_ba2_n(.clk(clk), .data(bank_r[2]), .pin_out(ddr3_ba[2]), .rst(1'b0));
+    
+    generate
+        for (genvar i = 0; i < 14; ++i) begin
+            oddr_pinout oddr_addr(.clk(clk), .data(addr_r[i]), .pin_out(ddr3_addr[i]), .rst(1'b0));
         end
-        else begin
-            command_q <= command_r;
-            addr_q <= addr_r;
-            bank_q <= bank_r;
-        end
-        
-    assign ddr3_cke   = cke_q;
-    assign ddr3_cs_n  = command_q[3];
-    assign ddr3_ras_n = command_q[2];
-    assign ddr3_cas_n = command_q[1];
-    assign ddr3_we_n  = command_q[0];
-    assign ddr3_ba    = bank_q;
-    assign ddr3_addr  = addr_q;
+    endgenerate
     
     wire wr_ack = state_q == STATE_WRITE && !delaying;
     
@@ -229,22 +273,25 @@ module ddr3_controller(
     reg[11:0] state_delay_q;
     reg[11:0] state_delay_r;
     always_comb begin
-        if (!state_delay_q) begin
+        if (delaying)
+            state_delay_r = state_delay_q - 1;
+        else begin
             case (command_r)
-                CMD_PRECHARGE: state_delay_r = 20;
-                CMD_WRITE: state_delay_r = 32;
+                CMD_PRECHARGE: state_delay_r = cRP;
+                CMD_WRITE: state_delay_r = 21;
                 CMD_READ: state_delay_r = 20;
-                CMD_REFRESH: state_delay_r = 16;
-                CMD_ACTIVE: state_delay_r = 20;
+                CMD_REFRESH: state_delay_r = cRFC;
+                CMD_ACTIVE: state_delay_r = cRCD;
                 default: state_delay_r = 12'h0;
             endcase
-        end else state_delay_r = state_delay_q - 1;
+        end
     end
     
     always_ff @(posedge clk)
         state_delay_q <= rst_i ? 12'h0 : state_delay_r;
     
     assign delaying = |state_delay_q;
+    
     always_comb begin
         state_r = state_q;
         target_r = target_q;
@@ -256,7 +303,7 @@ module ddr3_controller(
             end
             STATE_IDLE: begin
                 if (need_refresh_q) begin
-                    state_r = STATE_REFRESH;
+                    state_r = STATE_PRECHARGE;
                     target_r = STATE_REFRESH;
                 end
                 else if (wr_en) begin
@@ -273,6 +320,7 @@ module ddr3_controller(
             STATE_READ: state_r = STATE_IDLE;
             STATE_WRITE: state_r = STATE_IDLE;
             STATE_REFRESH: state_r = STATE_IDLE;
+            default:;
         endcase
     end
     wire rd_data_valid;
@@ -281,7 +329,7 @@ module ddr3_controller(
     always_ff @(posedge clk) begin
         if (rst_i) begin
             state_q <= STATE_INIT;
-            target_q <= STATE_IDLE;
+            target_q <= STATE_INIT;
         end else if (!delaying) begin
             state_q <= state_r;
             target_q <= target_r;
@@ -298,14 +346,20 @@ module ddr3_controller(
         else if (en_wr_q[2])
             wr_data_phy <= {32'h0, wr_data_phy[127:32]};
     end
-    
-    
     wire idelayctrl_rdy;
-    IDELAYCTRL IDELAYCTRL_inst (
+   // IDELAYCTRL: IDELAYE2/ODELAYE2 Tap Delay Value Control
+   //             Artix-7
+   // Xilinx HDL Language Template, version 2022.2
+
+   (* IODELAY_GROUP = "groupinputdelay" *) // Specifies group name for associated IDELAYs/ODELAYs and IDELAYCTRL
+
+   IDELAYCTRL IDELAYCTRL_inst (
       .RDY(idelayctrl_rdy),       // 1-bit output: Ready output
       .REFCLK(clk_ref), // 1-bit input: Reference clock input
       .RST(rst_i)        // 1-bit input: Active high reset input
    );
+
+   // End of IDELAYCTRL_inst instantiation
     wire io_n_wr = ~en_wr_q[0];
     wire[1:0] dqs_out;
     wire[1:0] dqs_in_delayed;
@@ -315,8 +369,9 @@ module ddr3_controller(
             wire[1:0] dqs_in;
             wire[1:0] dqs_io_n_wr;
             for (genvar i = 0; i < 2; ++i) begin
-               
+               wire[1:0] dqs_in_delayed_unbuf;
                IOBUFDS #(
+                  .DIFF_TERM("FALSE"),
                   .IBUF_LOW_PWR("FALSE"),   // Low Power - "TRUE", High Performance = "FALSE" 
                   .IOSTANDARD("DIFF_SSTL135"), // Specify the I/O standard
                   .SLEW("SLOW")            // Specify the output slew rate
@@ -373,12 +428,13 @@ module ddr3_controller(
                   .TBYTEIN(1'b0),     // 1-bit input: Byte group tristate
                   .TCE(1'b1)              // 1-bit input: 3-state clock enable
                );
+               (* IODELAY_GROUP = "groupinputdelay" *) // Specifies group name for associated IDELAYs/ODELAYs and IDELAYCTRL
                IDELAYE2 #(
                   .CINVCTRL_SEL("FALSE"),          // Enable dynamic clock inversion (FALSE, TRUE)
                   .DELAY_SRC("IDATAIN"),           // Delay input (IDATAIN, DATAIN)
                   .HIGH_PERFORMANCE_MODE("TRUE"), // Reduced jitter ("TRUE"), Reduced power ("FALSE")
                   .IDELAY_TYPE("FIXED"),           // FIXED, VARIABLE, VAR_LOAD, VAR_LOAD_PIPE
-                  .IDELAY_VALUE(27),                // Input delay tap setting (0-31)
+                  .IDELAY_VALUE(31),                // Input delay tap setting (0-31)
                   .PIPE_SEL("FALSE"),              // Select pipelined mode, FALSE, TRUE
                   .REFCLK_FREQUENCY(200.0),        // IDELAYCTRL clock input frequency in MHz (190.0-210.0, 290.0-310.0).
                   .SIGNAL_PATTERN("CLOCK")          // DATA, CLOCK input signal
@@ -404,7 +460,8 @@ module ddr3_controller(
            for (genvar i = 0; i < 16; ++i) begin
                IOBUF #(
                   .IBUF_LOW_PWR("FALSE"),  // Low Power - "TRUE", High Performance = "FALSE" 
-                  .IOSTANDARD("SSTL135") // Specify the I/O standard
+                  .IOSTANDARD("SSTL135"), // Specify the I/O standard
+                  .SLEW("SLOW")
                ) IOBUF_inst (
                   .O(dq_in[i]),     // Buffer output
                   .IO(ddr3_dq[i]),   // Buffer inout port (connect directly to top-level port)
@@ -457,6 +514,7 @@ module ddr3_controller(
                   .TBYTEIN(1'b0),     // 1-bit input: Byte group tristate
                   .TCE(1'b1)              // 1-bit input: 3-state clock enable
                );
+               (* IODELAY_GROUP = "groupinputdelay" *)
                IDELAYE2 #(
                   .CINVCTRL_SEL("FALSE"),          // Enable dynamic clock inversion (FALSE, TRUE)
                   .DELAY_SRC("IDATAIN"),           // Delay input (IDATAIN, DATAIN)
@@ -486,19 +544,40 @@ module ddr3_controller(
     endgenerate
     
     
-    reg[11:0] rd_en_q;
+    localparam rd_latency = 12;
+    reg[rd_latency-1:0] rd_en_q;
     always_ff @(posedge clk) begin
         if (rst_i)
-            rd_en_q <= 12'h000;
+            rd_en_q <= {rd_latency{1'b0}};
         else if (state_q == STATE_READ && !delaying)
-            rd_en_q <= {4'b1111, rd_en_q[8:1]};
+            rd_en_q <= {4'b1111, rd_en_q[rd_latency-4:1]};
         else
-            rd_en_q <= {1'b0, rd_en_q[11:1]};
+            rd_en_q <= {1'b0, rd_en_q[rd_latency-1:1]};
     end
     
     wire[15:0] rd_data_phy[3:0];
+    
+    wire iserde_oclk = clk_ddr;
+    wire iserde_clkdiv = clk;
+    
     generate begin
             for (genvar i = 0; i < 16; ++i) begin
+//                IDDR #(
+//                  .DDR_CLK_EDGE("SAME_EDGE_PIPELINED"), // "OPPOSITE_EDGE", "SAME_EDGE" 
+//                                                  //    or "SAME_EDGE_PIPELINED" 
+//                  .INIT_Q1(1'b0), // Initial value of Q1: 1'b0 or 1'b1
+//                  .INIT_Q2(1'b0), // Initial value of Q2: 1'b0 or 1'b1
+//                  .SRTYPE("SYNC") // Set/Reset type: "SYNC" or "ASYNC" 
+//               ) IDDR_inst (
+//                  .Q1(rd_data_phy[3][i]), // 1-bit output for positive edge of clock
+//                  .Q2(rd_data_phy[0][i]), // 1-bit output for negative edge of clock
+//                  .C(dqs_in_delayed[i > 7]),   // 1-bit clock input
+//                  .CE(1'b1), // 1-bit clock enable input
+//                  .D(dq_in_delayed[i]),   // 1-bit DDR data input
+//                  .R(1'b0),   // 1-bit reset
+//                  .S(1'b0)    // 1-bit set
+//               );
+                
                 ISERDESE2 #(
                   .DATA_RATE("DDR"),           // DDR, SDR
                   .DATA_WIDTH(4),              // Parallel data width (2-8,10,14)
@@ -527,10 +606,10 @@ module ddr3_controller(
                   .Q2(rd_data_phy[1][i]),
                   .Q3(rd_data_phy[2][i]),
                   .Q4(rd_data_phy[3][i]),
-    //              .Q5(Q5),
-    //              .Q6(Q6),
-    //              .Q7(Q7),
-    //              .Q8(Q8),
+                  .Q5(),
+                  .Q6(),
+                  .Q7(),
+                  .Q8(),
                   // SHIFTOUT1, SHIFTOUT2: 1-bit (each) output: Data width expansion output ports
                   .SHIFTOUT1(),
                   .SHIFTOUT2(),
@@ -542,13 +621,13 @@ module ddr3_controller(
             
                   // CE1, CE2: 1-bit (each) input: Data register clock enable inputs
                   .CE1(1'b1),
-                  .CE2(1'b0),
+                  .CE2(1'b1),
                   .CLKDIVP(1'b0),           // 1-bit input: TBD
                   // Clocks: 1-bit (each) input: ISERDESE2 clock input ports
                   .CLK(dqs_in_delayed[i > 7]),                   // 1-bit input: High-speed clock
                   .CLKB(~dqs_in_delayed[i > 7]),                 // 1-bit input: High-speed secondary clock
-                  .CLKDIV(clk),             // 1-bit input: Divided clock
-                  .OCLK(clk_ddr),                 // 1-bit input: High speed output clock used when INTERFACE_TYPE="MEMORY" 
+                  .CLKDIV(iserde_clkdiv),             // 1-bit input: Divided clock
+                  .OCLK(iserde_oclk),                 // 1-bit input: High speed output clock used when INTERFACE_TYPE="MEMORY" 
                   // Dynamic Clock Inversions: 1-bit (each) input: Dynamic clock inversion pins to switch clock polarity
                   .DYNCLKDIVSEL(1'b0), // 1-bit input: Dynamic CLKDIV inversion
                   .DYNCLKSEL(1'b0),       // 1-bit input: Dynamic CLK/CLKB inversion
@@ -556,7 +635,7 @@ module ddr3_controller(
                   .D(1'b0),                       // 1-bit input: Data input
                   .DDLY(dq_in_delayed[i]),                 // 1-bit input: Serial data from IDELAYE2
                   .OFB(1'b0),                   // 1-bit input: Data feedback from OSERDESE2
-                  .OCLKB(~clk_ddr),               // 1-bit input: High speed negative edge output clock
+                  .OCLKB(~iserde_oclk),               // 1-bit input: High speed negative edge output clock
                   .RST(rst_i),                   // 1-bit input: Active high asynchronous reset
                   // SHIFTIN1, SHIFTIN2: 1-bit (each) input: Data width expansion input ports
                   .SHIFTIN1(1'b0),

@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/nguye/ddr3_controller_artya7/ddr3_controller_artya7.runs/impl_1'
+HD_PWD='C:/Users/nguye/Documents/GitHub/DDR3MemoryControllerArtyA7/ddr3_controller_artya7.runs/impl_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
