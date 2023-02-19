@@ -142,8 +142,13 @@ module ddr3_controller(
     localparam cZQInit = 512;
     localparam cRCD = ns_to_clk(14); // active to read/write
     localparam cRP = ns_to_clk(14);  // precharge period
+    `ifndef XILINX_SIMULATOR
     localparam cRESET  = ns_to_clk(200_000) + 1;
     localparam cRSTCKE = ns_to_clk(500_000) + 1;
+    `else
+    localparam cRESET  = 100;
+    localparam cRSTCKE = 100;
+    `endif
     
     localparam REFRESH_CTR_Q_INIT = cZQInit + cMOD + 3 * cMRD + cXPR + cRSTCKE + cRESET;
     localparam REFRESH_PERIOD_CK  = 781;
@@ -297,7 +302,7 @@ module ddr3_controller(
         target_r = target_q;
         case (state_q)
             STATE_INIT: begin
-                if (need_refresh_q) begin
+                if (~|refresh_ctr_q) begin
                     state_r = STATE_IDLE;
                 end
             end
