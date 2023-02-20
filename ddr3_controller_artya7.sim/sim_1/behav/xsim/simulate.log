@@ -433,4 +433,31 @@ testbench.u_ram.cmd_task: at time 17640000.0 ps INFO: Activate  bank 0 row 0000
 testbench.u_ram.cmd_task: at time 17670000.0 ps INFO: Write     bank 0 col 068, auto precharge 1
 testbench.u_ram.data_task: at time 17735000.0 ps INFO: WRITE @ DQS= bank = 0 row = 0000 col = 00000068 data = 2ad0
 testbench.u_ram.data_task: at time 17740000.0 ps INFO: WRITE @ DQS= bank = 0 row = 0000 col = 00000069 data = 93b6
-testbench.u_ram.data_task: at time 17745000.0 ps INFO: WRITE @ DQS= bank = 0 row = 0000 col = 0000006a data 
+testbench.u_ram.data_task: at time 17745000.0 ps INFO: WRITE @ DQS= bank = 0 row = 0000 col = 0000006a data = ea90
+testbench.u_ram.data_task: at time 17750000.0 ps INFO: WRITE @ DQS= bank = 0 row = 0000 col = 0000006b data = 7209
+testbench.u_ram.data_task: at time 17755000.0 ps INFO: WRITE @ DQS= bank = 0 row = 0000 col = 0000006c data = 21e2
+testbench.u_ram.data_task: at time 17760000.0 ps INFO: WRITE @ DQS= bank = 0 row = 0000 col = 0000006d data = 799a
+testbench.u_ram.data_task: at time 17765000.0 ps INFO: WRITE @ DQS= bank = 0 row = 0000 col = 0000006e data = e1a2
+testbench.u_ram.data_task: at time 17770000.0 ps INFO: WRITE @ DQS= bank = 0 row = 0000 col = 0000006f data = 9825
+testbench.u_ram.main: at time 17820000.0 ps INFO: Auto Precharge bank           0
+testbench.u_ram.cmd_task: at time 17900000.0 ps INFO: Activate  bank 0 row 0000
+testbench.u_ram.cmd_task: at time 17930000.0 ps INFO: Read      bank 0 col 0b8, auto precharge 1
+testbench.u_ram.main: at time 17970000.0 ps INFO: Auto Precharge bank           0
+testbench.u_ram.data_task: at time 17975000.0 ps INFO: READ @ DQS= bank = 0 row = 0000 col = 000000b8 data = xxxx
+testbench.u_ram.data_task: at time 17980000.0 ps INFO: READ @ DQS= bank = 0 row = 0000 col = 000000b9 data = xxxx
+testbench.u_ram.data_task: at time 17985000.0 ps INFO: READ @ DQS= bank = 0 row = 0000 col = 000000ba data = xxxx
+testbench.u_ram.data_task: at time 17990000.0 ps INFO: READ @ DQS= bank = 0 row = 0000 col = 000000bb data = xxxx
+testbench.u_ram.data_task: at time 17995000.0 ps INFO: READ @ DQS= bank = 0 row = 0000 col = 000000bc data = xxxx
+testbench.u_ram.data_task: at time 18000000.0 ps INFO: READ @ DQS= bank = 0 row = 0000 col = 000000bd data = xxxx
+testbench.u_ram.data_task: at time 18005000.0 ps INFO: READ @ DQS= bank = 0 row = 0000 col = 000000be data = xxxx
+testbench.u_ram.data_task: at time 18010000.0 ps INFO: READ @ DQS= bank = 0 row = 0000 col = 000000bf data = xxxx
+testbench.u_ram.cmd_task: at time 18150000.0 ps INFO: Activate  bank 0 row 0000
+testbench.u_ram.cmd_task: at time 18180000.0 ps INFO: Write     bank 0 col 0c8, auto precharge 1
+testbench.u_ram.data_task: at time 18245000.0 ps INFO: WRITE @ DQS= bank = 0 row = 0000 col = 000000c8 data = 8192
+testbench.u_ram.data_task: at time 18250000.0 ps INFO: WRITE @ DQS= bank = 0 row = 0000 col = 000000c9 data = dd6e
+testbench.u_ram.data_task: at time 18255000.0 ps INFO: WRITE @ DQS= bank = 0 row = 0000 col = 000000ca data = 40d2
+testbench.u_ram.data_task: at time 18260000.0 ps INFO: WRITE @ DQS= bank = 0 row = 0000 col = 000000cb data = ba2e
+testbench.u_ram.data_task: at time 18265000.0 ps INFO: WRITE @ DQS= bank = 0 row = 0000 col = 000000cc data = a66b
+testbench.u_ram.data_task: at time 18270000.0 ps INFO: WRITE @ DQS= bank = 0 row = 0000 col = 000000cd data = 9ff2
+testbench.u_ram.data_task: at time 18275000.0 ps INFO: WRITE @ DQS= bank = 0 row = 0000 col = 000000ce data = 672b
+testbench.u_ram.data_task: at time 18280000.0 ps INFO: WRITE @ DQS= bank = 0 row = 0000 col = 000000cf data = f8b2

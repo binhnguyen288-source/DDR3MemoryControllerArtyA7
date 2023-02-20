@@ -46,6 +46,7 @@ module ddr3_controller(
     // user ports
     input rst_i,
     input clk,
+    input clk_90,
     input clk_ref,
     input clk_ddr,
     input[31:0] ram_addr,
@@ -60,7 +61,6 @@ module ddr3_controller(
     output ddr3_cke,
     output ddr3_ck_p,
     output ddr3_ck_n,
-    output ddr3_cs_n,
     output ddr3_ras_n,
     output ddr3_cas_n,
     output ddr3_we_n,
@@ -244,10 +244,10 @@ module ddr3_controller(
     wire delaying;
     oddr_pinout #(.rst_value(1'b0)) oddr_reset_n(.clk(clk), .data(reset_n_r), .pin_out(ddr3_reset_n), .rst(rst_i));
     oddr_pinout #(.rst_value(1'b0)) oddr_cke(.clk(clk), .data(cke_r), .pin_out(ddr3_cke), .rst(rst_i));
-    oddr_pinout #(.rst_value(1'b0)) oddr_cs_n(.clk(clk), .data(command_r[3]), .pin_out(ddr3_cs_n), .rst(rst_i || delaying));
-    oddr_pinout #(.rst_value(1'b1)) oddr_ras_n(.clk(clk), .data(command_r[2]), .pin_out(ddr3_ras_n), .rst(rst_i || delaying));
-    oddr_pinout #(.rst_value(1'b1)) oddr_cas_n(.clk(clk), .data(command_r[1]), .pin_out(ddr3_cas_n), .rst(rst_i || delaying));
-    oddr_pinout #(.rst_value(1'b1)) oddr_we_n(.clk(clk), .data(command_r[0]), .pin_out(ddr3_we_n), .rst(rst_i || delaying));
+    
+    oddr_pinout #(.rst_value(1'b1)) oddr_ras_n(.clk(clk), .data(delaying ? 1'b1 : command_r[2]), .pin_out(ddr3_ras_n), .rst(rst_i));
+    oddr_pinout #(.rst_value(1'b1)) oddr_cas_n(.clk(clk), .data(delaying ? 1'b1 : command_r[1]), .pin_out(ddr3_cas_n), .rst(rst_i));
+    oddr_pinout #(.rst_value(1'b1)) oddr_we_n(.clk(clk), .data(delaying ? 1'b1 : command_r[0]), .pin_out(ddr3_we_n), .rst(rst_i));
     
     oddr_pinout oddr_ba0_n(.clk(clk), .data(bank_r[0]), .pin_out(ddr3_ba[0]), .rst(1'b0));
     oddr_pinout oddr_ba1_n(.clk(clk), .data(bank_r[1]), .pin_out(ddr3_ba[1]), .rst(1'b0));

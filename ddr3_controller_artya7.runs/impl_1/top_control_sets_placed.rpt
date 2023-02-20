@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 ------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
-| Date         : Sun Feb 19 22:05:20 2023
+| Date         : Sun Feb 19 23:44:31 2023
 | Host         : Binh running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file top_control_sets_placed.rpt
 | Design       : top
@@ -23,11 +23,11 @@ Table of Contents
 +----------------------------------------------------------+-------+
 |                          Status                          | Count |
 +----------------------------------------------------------+-------+
-| Total control sets                                       |    13 |
-|    Minimum number of control sets                        |    13 |
+| Total control sets                                       |    12 |
+|    Minimum number of control sets                        |    12 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    27 |
+| Unused register locations in slices containing registers |    19 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -39,8 +39,8 @@ Table of Contents
 +--------------------+-------+
 |       Fanout       | Count |
 +--------------------+-------+
-| Total control sets |    13 |
-| >= 0 to < 4        |     1 |
+| Total control sets |    12 |
+| >= 0 to < 4        |     0 |
 | >= 4 to < 6        |     3 |
 | >= 6 to < 8        |     0 |
 | >= 8 to < 10       |     0 |
@@ -60,10 +60,10 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | No           | No                    | No                     |              47 |           19 |
 | No           | No                    | Yes                    |               0 |            0 |
-| No           | Yes                   | No                     |              65 |           23 |
-| Yes          | No                    | No                     |             613 |          130 |
+| No           | Yes                   | No                     |              65 |           27 |
+| Yes          | No                    | No                     |             613 |          158 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |              40 |           11 |
+| Yes          | Yes                   | No                     |              40 |           12 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
@@ -73,19 +73,18 @@ Table of Contents
 +--------------+--------------------------+--------------------------------------+------------------+----------------+--------------+
 | Clock Signal |       Enable Signal      |           Set/Reset Signal           | Slice Load Count | Bel Load Count | Bels / Slice |
 +--------------+--------------------------+--------------------------------------+------------------+----------------+--------------+
-|  clk_BUFG    |                          | controller/oddr_ras_n/rst_i_reg      |                2 |              3 |         1.50 |
 |  clk_BUFG    | error_count              | rst_i                                |                1 |              4 |         4.00 |
 |  clk_BUFG    | rst_counter[3]_i_2_n_0   | clkgeninst/SR[0]                     |                1 |              4 |         4.00 |
 |  clk_BUFG    | ram_addr[8]_i_1_n_0      |                                      |                2 |              5 |         2.50 |
 |  clk_BUFG    |                          | controller/refresh_ctr_q[15]_i_1_n_0 |                5 |             11 |         2.20 |
-|  clk_BUFG    | controller/wr_data_phy   | controller/wr_data_phy[127]_i_1_n_0  |                9 |             32 |         3.56 |
+|  clk_BUFG    | controller/wr_data_phy   | controller/wr_data_phy[127]_i_1_n_0  |               10 |             32 |         3.20 |
 |  clk_BUFG    |                          |                                      |               19 |             49 |         2.58 |
-|  clk_BUFG    |                          | rst_i                                |               16 |             51 |         3.19 |
-|  clk_BUFG    | controller/wr_data_phy   |                                      |               33 |             96 |         2.91 |
-|  clk_BUFG    | controller/p_0_in        |                                      |               27 |            128 |         4.74 |
-|  clk_BUFG    | controller/E[0]          |                                      |               20 |            128 |         6.40 |
-|  clk_BUFG    | controller/rst_i_reg[0]  |                                      |               20 |            128 |         6.40 |
-|  clk_BUFG    | ram_wr_data[127]_i_1_n_0 |                                      |               60 |            256 |         4.27 |
+|  clk_BUFG    |                          | rst_i                                |               22 |             54 |         2.45 |
+|  clk_BUFG    | controller/wr_data_phy   |                                      |               38 |             96 |         2.53 |
+|  clk_BUFG    | controller/E[0]          |                                      |               27 |            128 |         4.74 |
+|  clk_BUFG    | controller/rst_i_reg[0]  |                                      |               22 |            128 |         5.82 |
+|  clk_BUFG    | controller/p_0_in        |                                      |               29 |            128 |         4.41 |
+|  clk_BUFG    | ram_wr_data[127]_i_1_n_0 |                                      |               72 |            256 |         3.56 |
 +--------------+--------------------------+--------------------------------------+------------------+----------------+--------------+
 
 

@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
-| Date             : Sun Feb 19 22:05:51 2023
+| Date             : Sun Feb 19 23:44:55 2023
 | Host             : Binh running 64-bit major release  (build 9200)
 | Command          : report_power -file top_power_routed.rpt -pb top_power_summary_routed.pb -rpx top_power_routed.rpx
 | Design           : top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.413        |
+| Total On-Chip Power (W)  | 0.417        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.349        |
+| Dynamic (W)              | 0.354        |
 | Device Static (W)        | 0.064        |
 | Effective TJA (C/W)      | 4.8          |
 | Max Ambient (C)          | 98.0         |
@@ -53,19 +53,19 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.007 |        7 |       --- |             --- |
-| Slice Logic              |    <0.001 |     1410 |       --- |             --- |
-|   LUT as Logic           |    <0.001 |      360 |     20800 |            1.73 |
+| Slice Logic              |    <0.001 |     1413 |       --- |             --- |
+|   LUT as Logic           |    <0.001 |      362 |     20800 |            1.74 |
 |   Register               |    <0.001 |      765 |     41600 |            1.84 |
 |   CARRY4                 |    <0.001 |       18 |      8150 |            0.22 |
 |   LUT as Distributed RAM |    <0.001 |      128 |      9600 |            1.33 |
 |   F7/F8 Muxes            |    <0.001 |        6 |     32600 |            0.02 |
 |   LUT as Shift Register  |    <0.001 |        2 |      9600 |            0.02 |
-|   Others                 |     0.000 |       39 |       --- |             --- |
-| Signals                  |    <0.001 |     1096 |       --- |             --- |
-| PLL                      |     0.093 |        1 |         5 |           20.00 |
+|   Others                 |     0.000 |       38 |       --- |             --- |
+| Signals                  |    <0.001 |     1101 |       --- |             --- |
+| MMCM                     |     0.097 |        1 |         5 |           20.00 |
 | I/O                      |     0.248 |       53 |       210 |           25.24 |
 | Static Power             |     0.064 |          |           |                 |
-| Total                    |     0.413 |          |           |                 |
+| Total                    |     0.417 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -75,8 +75,8 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       0.950 |     0.036 |       0.030 |      0.006 |       NA    | Unspecified | NA         |
-| Vccaux    |       1.800 |     0.136 |       0.125 |      0.011 |       NA    | Unspecified | NA         |
+| Vccint    |       0.950 |     0.032 |       0.025 |      0.006 |       NA    | Unspecified | NA         |
+| Vccaux    |       1.800 |     0.141 |       0.130 |      0.011 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -148,9 +148,9 @@ Table of Contents
 +-------------------------------------+-----------+
 | Name                                | Power (W) |
 +-------------------------------------+-----------+
-| top                                 |     0.349 |
-|   clkgeninst                        |     0.094 |
-|   controller                        |     0.248 |
+| top                                 |     0.354 |
+|   clkgeninst                        |     0.098 |
+|   controller                        |     0.247 |
 |     OBUFDS_inst                     |     0.006 |
 |     genblk1[0].oddr_addr            |     0.002 |
 |     genblk1[10].oddr_addr           |     0.002 |
@@ -191,7 +191,6 @@ Table of Contents
 |     oddr_ba2_n                      |     0.002 |
 |     oddr_cas_n                      |     0.002 |
 |     oddr_cke                        |     0.002 |
-|     oddr_cs_n                       |     0.002 |
 |     oddr_ras_n                      |     0.002 |
 |     oddr_reset_n                    |     0.002 |
 |     oddr_we_n                       |     0.002 |

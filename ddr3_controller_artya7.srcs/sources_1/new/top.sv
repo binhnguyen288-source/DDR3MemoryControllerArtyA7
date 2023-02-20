@@ -40,10 +40,11 @@ module top(
     output[3:0] led
 );
     wire pll_locked;
-    wire clk, clk_ref, clk_ddr;
+    wire clk, clk_90, clk_ref, clk_ddr;
    clkgen clkgeninst(
     .osc(osc),
     .clk(clk),
+    .clk_90(clk_90),
     .clk_ref(clk_ref),
     .clk_ddr(clk_ddr),
     .pll_locked(pll_locked)
@@ -66,11 +67,13 @@ module top(
    wire[127:0]  ram_rd_data;
    wire         ram_accept;
    wire         ram_ack;
+   assign ddr3_cs_n = 1'b0;
    
    ddr3_controller controller(
     // user ports
     .rst_i(rst_i),
     .clk(clk),
+    .clk_90(clk_90),
     .clk_ref(clk_ref),
     .clk_ddr(clk_ddr),
     .ram_addr(ram_addr),
@@ -85,7 +88,6 @@ module top(
     .ddr3_cke(ddr3_cke),
     .ddr3_ck_p(ddr3_ck_p),
     .ddr3_ck_n(ddr3_ck_n),
-    .ddr3_cs_n(ddr3_cs_n),
     .ddr3_ras_n(ddr3_ras_n),
     .ddr3_cas_n(ddr3_cas_n),
     .ddr3_we_n(ddr3_we_n),
